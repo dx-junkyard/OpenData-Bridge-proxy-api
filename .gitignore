@@ -1,0 +1,7 @@
+__pycache__
+.venv
+.vscode
+proxy-api/src/notebook
+digital-go-geocode/src/notebook
+
+proxy-api/src/resources/geocode/merged_jyuukyo.csv
