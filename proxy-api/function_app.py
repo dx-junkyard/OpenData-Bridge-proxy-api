@@ -1,7 +1,12 @@
 import azure.functions as func
+import os
 import logging
 import json
 from dataclasses import asdict
+
+from src.utils import get_config
+config = get_config(os.environ['ConfigFileName'])
+KEY_VAULT_URL = config['key-vault']['url']
 
 app = func.FunctionApp()
 
@@ -33,7 +38,7 @@ from src.service.digitalGoGeocodeService import DigitalGoGeocodeService
 @app.route(route="digital-go-geocode", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
 def digital_go_geocode(req: func.HttpRequest) -> func.HttpResponse:
 
-    digitalGoGeocodeService = DigitalGoGeocodeService()
+    digitalGoGeocodeService = DigitalGoGeocodeService(KEY_VAULT_URL, config['digital-go-geocode'])
 
     address = req.params.get('address')
 
@@ -59,7 +64,7 @@ from src.service.translateService import TranslateService
 @app.route(route="japanese-to-english", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
 def japanese_to_english(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function for jp2en executed.')
-    translateService = TranslateService()
+    translateService = TranslateService(KEY_VAULT_URL, config['azure-translator'])
 
     jp_str = req.params.get('jp')
 
@@ -75,16 +80,4 @@ def japanese_to_english(req: func.HttpRequest) -> func.HttpResponse:
             "Please pass an address in the query string.",
             status_code=200
         )
-
-# 作業内容
-
-# キーコンテナー
-# デプロイ
-# IAMで自分を追加()
-
-# 関数アプリの設定のIDで状態をON（システム割り当てマネージドIDの有効化）
-# キーコンテナーのIAMで設定した関数アプリにロールの割り当て（キーコンテナーシークレットユーザー)
-
-# シークレットの追加
-
-
+    

@@ -8,11 +8,10 @@ from parse.jp2enParser import jp2enParser
 from utils import get_secret
 
 class TranslateService(object):
-    def __init__(self):
+    def __init__(self, key_vault_url, config):
         self.parser = jp2enParser()
-        SECRET_NAME = "DataNorm-Translator"
-        self._API_KEY = get_secret(SECRET_NAME) # APIキーのシークレット名を指定
-        self._ENDPOINT = "https://api.cognitive.microsofttranslator.com/"
+        self._API_KEY = get_secret(key_vault_url, config['secret-name']) # APIキーのシークレット名を指定
+        self._URL = config['url']
         
     def jp2en(self, jp_str):
         headers = {
@@ -26,7 +25,7 @@ class TranslateService(object):
 
         path = '/translate?api-version=3.0'
         params = '&from=ja&to=en'  # 日本語から英語への翻訳
-        constructed_url = self._ENDPOINT + path + params
+        constructed_url = self._URL + path + params
 
         response = requests.post(constructed_url, headers=headers, json=body)
 

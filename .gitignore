@@ -3,5 +3,7 @@ __pycache__
 .vscode
 proxy-api/src/notebook
 digital-go-geocode/src/notebook
+proxy-api/config/local.yaml
+proxy-api/config/prod.yaml
 
 proxy-api/src/resources/geocode/merged_jyuukyo.csv
