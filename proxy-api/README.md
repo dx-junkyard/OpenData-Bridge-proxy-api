@@ -88,28 +88,6 @@ $ curl {URL}/japanese-to-english?jp=%E5%8C%97%E4%B9%9D%E5%B7%9E%E5%B8%82%E9%9F%B
 
 ----- 
 
-# /poi
-POIコードの取得
-### request parameter
-| name | required | description |
-| -- | -- |  -- |
 
-### response
-| name | type | value | description |
-| -- | -- | -- | -- |
-| poi | | | | 
-
-### sample
-```bash
-```
-
-# 作業内容
-
-1. キーコンテナー
-2. デプロイ
-3. IAMで自分を追加()
-4. 関数アプリの設定のIDで状態をON（システム割り当てマネージドIDの有効化）
-5. キーコンテナーのIAMで設定した関数アプリにロールの割り当て（キーコンテナーシークレットユーザー)
-6. シークレットの追加
 
 
