@@ -88,17 +88,6 @@ $ curl {URL}/japanese-to-english?jp=%E5%8C%97%E4%B9%9D%E5%B7%9E%E5%B8%82%E9%9F%B
 
 ----- 
 
-# /poi
-POIコードの取得
-### request parameter
-| name | required | description |
-| -- | -- |  -- |
 
-### response
-| name | type | value | description |
-| -- | -- | -- | -- |
-| poi | | | | 
 
-### sample
-```bash
-```
+

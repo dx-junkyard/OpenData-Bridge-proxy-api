@@ -1,0 +1,9 @@
+deploy:
+  url: ''
+key-vault:
+  url: ''
+digital-go-geocode:
+  secret-name: ''
+azure-translator:
+  url: ''
+  secret-name: ''
