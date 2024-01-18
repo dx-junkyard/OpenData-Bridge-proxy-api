@@ -10,6 +10,11 @@ KEY_VAULT_URL = config['key-vault']['url']
 
 app = func.FunctionApp()
 
+@app.route(route="hello", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+def hello(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Python HTTP trigger function processed a hello request.')
+    return func.HttpResponse("Hello World from /hello", status_code=200)
+
 from src.service.geocodeService import GeocodeRepository
 
 @app.route(route="geocode", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
@@ -35,6 +40,7 @@ def geocode(req: func.HttpRequest) -> func.HttpResponse:
         )
 
 from src.service.digitalGoGeocodeService import DigitalGoGeocodeService
+
 @app.route(route="digital-go-geocode", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
 def digital_go_geocode(req: func.HttpRequest) -> func.HttpResponse:
 
@@ -53,11 +59,6 @@ def digital_go_geocode(req: func.HttpRequest) -> func.HttpResponse:
              "Please pass an address in the query string.",
              status_code=200
         )
-
-@app.route(route="hello", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
-def hello(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a hello request.')
-    return func.HttpResponse("Hello World from /hello", status_code=200)
 
 from src.service.translateService import TranslateService
 
