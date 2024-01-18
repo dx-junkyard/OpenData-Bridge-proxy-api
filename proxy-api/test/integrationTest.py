@@ -1,17 +1,21 @@
-import logging
-import json
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+from src.utils import get_config
 import unittest
 import requests
 
-targetURL = 'http://localhost:7071/api'
-# targetURL = 'https://odb-test-proxy-api.azurewebsites.net/api'
-
-logging.info(f'target URL : {targetURL}')
-
 class IntegrationTest(unittest.TestCase):
+    TARGET_URL: str
+
+    @classmethod
+    def setUpClass(cls):
+        config = get_config('local.yaml')
+        cls.TARGET_URL = config['deploy']['url']
+
     def test_hello(self):
         endpoint = '/hello'
-        url = targetURL + endpoint
+        url = IntegrationTest.TARGET_URL + endpoint
         response = requests.get(url)
 
         self.assertEqual(response.text, "Hello World from /hello")
@@ -19,7 +23,7 @@ class IntegrationTest(unittest.TestCase):
     def test_geocode(self):
         endpoint = '/geocode'
         params = '?city_block_id=3&residence_id=28&address=赤岩町'
-        url = targetURL + endpoint + params
+        url = IntegrationTest.TARGET_URLgetURL + endpoint + params
         response = requests.get(url).json()
 
         self.assertEqual(response['code'], 401030)
@@ -33,7 +37,7 @@ class IntegrationTest(unittest.TestCase):
     def test_digital_go_geocode(self):
         endpoint = '/digital-go-geocode'
         params = '?address=北九州市若松区響町一丁目'
-        url = targetURL + endpoint + params
+        url = IntegrationTest.TARGET_URLgetURL + endpoint + params
         response = requests.get(url).json()
 
         self.assertEqual(response['lg_code'], '401030')
@@ -48,7 +52,7 @@ class IntegrationTest(unittest.TestCase):
     def test_japanese_to_english(self):
         endpoint = '/japanese-to-english'
         params = '?jp=東京都'
-        url = targetURL + endpoint + params
+        url = IntegrationTest.TARGET_URL + endpoint + params
         response = requests.get(url).json()
 
         self.assertEqual(response["en"], "Tokyo")
