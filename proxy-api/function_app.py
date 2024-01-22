@@ -82,3 +82,25 @@ def japanese_to_english(req: func.HttpRequest) -> func.HttpResponse:
             status_code=200
         )
     
+from src.service.idService import IDService
+
+@app.route(route="id", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+def Id(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Python HTTP trigger function for jp2en executed.')
+    idService = IDService(KEY_VAULT_URL, config['id'])
+
+    header = req.params.get('header', '')
+    ret = idService.get(header)
+
+    return func.HttpResponse(
+        json.dumps(asdict(ret)),
+        headers={"Content-Type": "application/json"}
+    )
+
+@app.route(route="reset-id", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+def resetId(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Python HTTP trigger function for jp2en executed.')
+
+    IDService(KEY_VAULT_URL, config['id']).reset()
+
+    return func.HttpResponse("Succesful reset ID", status_code=200)
