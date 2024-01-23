@@ -104,3 +104,25 @@ def resetId(req: func.HttpRequest) -> func.HttpResponse:
     IDService(KEY_VAULT_URL, config['id']).reset()
 
     return func.HttpResponse("Succesful reset ID", status_code=200)
+
+from src.service.poiService import POIService
+
+@app.route(route="poi", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+def poi(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Python HTTP trigger function for jp2en executed.')
+    poiService = POIService()
+
+    word = req.params.get('word')
+
+    if word:
+        poiData = poiService.get(word)
+        
+        return func.HttpResponse(
+            json.dumps(asdict(poiData)),
+            headers={"Content-Type": "application/json"}
+        )
+    else:
+        return func.HttpResponse(
+            "Please pass an word in the query string.",
+            status_code=200
+        )
