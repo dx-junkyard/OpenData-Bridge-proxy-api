@@ -1,6 +1,6 @@
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.utils import get_config
 import unittest
 import requests
@@ -10,7 +10,7 @@ class IntegrationTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        config = get_config('local.yaml')
+        config = get_config('prod.yaml')
         cls.TARGET_URL = config['deploy']['url']
 
     def test_hello(self):
@@ -23,7 +23,7 @@ class IntegrationTest(unittest.TestCase):
     def test_geocode(self):
         endpoint = '/geocode'
         params = '?city_block_id=3&residence_id=28&address=赤岩町'
-        url = IntegrationTest.TARGET_URLgetURL + endpoint + params
+        url = IntegrationTest.TARGET_URL + endpoint + params
         response = requests.get(url).json()
 
         self.assertEqual(response['code'], 401030)
@@ -37,7 +37,7 @@ class IntegrationTest(unittest.TestCase):
     def test_digital_go_geocode(self):
         endpoint = '/digital-go-geocode'
         params = '?address=北九州市若松区響町一丁目'
-        url = IntegrationTest.TARGET_URLgetURL + endpoint + params
+        url = IntegrationTest.TARGET_URL + endpoint + params
         response = requests.get(url).json()
 
         self.assertEqual(response['lg_code'], '401030')
@@ -57,5 +57,49 @@ class IntegrationTest(unittest.TestCase):
 
         self.assertEqual(response["en"], "Tokyo")
 
+    def test_id(self):
+        # IDのカウントリセット
+        endpoint = '/id-reset'
+        url = IntegrationTest.TARGET_URL + endpoint
+        response = requests.get(url)
+
+        endpoint = '/id'
+        url = IntegrationTest.TARGET_URL + endpoint
+
+        response = requests.get(url).json()
+        self.assertEqual(response["id"], "0")
+
+        response = requests.get(url).json()
+        self.assertEqual(response["id"], "1")
+
+    def test_id_header(self):
+        # IDのカウントリセット
+        endpoint = '/id-reset'
+        url = IntegrationTest.TARGET_URL + endpoint
+        response = requests.get(url)
+
+        endpoint = '/id'
+        params = '?header=test_'
+        url = IntegrationTest.TARGET_URL + endpoint + params
+
+        response = requests.get(url).json()
+        self.assertEqual(response["id"], "test_0")
+
+    def test_id_reset(self):
+        endpoint = '/id-reset'
+
+        url = IntegrationTest.TARGET_URL + endpoint
+        response = requests.get(url)
+
+        self.assertEqual(response.text, "Success")
+
+    def test_poi(self):
+        endpoint = '/poi'
+        params = '?word=火山'
+        url = IntegrationTest.TARGET_URL + endpoint + params
+        response = requests.get(url).json()
+
+        self.assertEqual(response["code"], 102)
+    
 if __name__ == '__main__':
     unittest.main()

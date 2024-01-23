@@ -97,13 +97,13 @@ def Id(req: func.HttpRequest) -> func.HttpResponse:
         headers={"Content-Type": "application/json"}
     )
 
-@app.route(route="reset-id", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+@app.route(route="id-reset", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
 def resetId(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function for jp2en executed.')
 
     IDService(KEY_VAULT_URL, config['id']).reset()
 
-    return func.HttpResponse("Succesful reset ID", status_code=200)
+    return func.HttpResponse("Success", status_code=200)
 
 from src.service.poiService import POIService
 
