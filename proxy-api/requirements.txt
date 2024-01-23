@@ -6,4 +6,6 @@ PyYAML
 azure-functions
 azure-keyvault-secrets
 azure-identity
+azure-storage-blob
 pandas
+openpyxl

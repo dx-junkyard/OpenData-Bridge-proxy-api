@@ -10,6 +10,11 @@ KEY_VAULT_URL = config['key-vault']['url']
 
 app = func.FunctionApp()
 
+@app.route(route="hello", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+def hello(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Python HTTP trigger function processed a hello request.')
+    return func.HttpResponse("Hello World from /hello", status_code=200)
+
 from src.service.geocodeService import GeocodeRepository
 
 @app.route(route="geocode", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
@@ -35,6 +40,7 @@ def geocode(req: func.HttpRequest) -> func.HttpResponse:
         )
 
 from src.service.digitalGoGeocodeService import DigitalGoGeocodeService
+
 @app.route(route="digital-go-geocode", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
 def digital_go_geocode(req: func.HttpRequest) -> func.HttpResponse:
 
@@ -53,11 +59,6 @@ def digital_go_geocode(req: func.HttpRequest) -> func.HttpResponse:
              "Please pass an address in the query string.",
              status_code=200
         )
-
-@app.route(route="hello", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
-def hello(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a hello request.')
-    return func.HttpResponse("Hello World from /hello", status_code=200)
 
 from src.service.translateService import TranslateService
 
@@ -81,3 +82,47 @@ def japanese_to_english(req: func.HttpRequest) -> func.HttpResponse:
             status_code=200
         )
     
+from src.service.idService import IDService
+
+@app.route(route="id", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+def Id(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Python HTTP trigger function for jp2en executed.')
+    idService = IDService(KEY_VAULT_URL, config['id'])
+
+    header = req.params.get('header', '')
+    ret = idService.get(header)
+
+    return func.HttpResponse(
+        json.dumps(asdict(ret)),
+        headers={"Content-Type": "application/json"}
+    )
+
+@app.route(route="id-reset", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+def resetId(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Python HTTP trigger function for jp2en executed.')
+
+    IDService(KEY_VAULT_URL, config['id']).reset()
+
+    return func.HttpResponse("Success", status_code=200)
+
+from src.service.poiService import POIService
+
+@app.route(route="poi", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+def poi(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Python HTTP trigger function for jp2en executed.')
+    poiService = POIService()
+
+    word = req.params.get('word')
+
+    if word:
+        poiData = poiService.get(word)
+        
+        return func.HttpResponse(
+            json.dumps(asdict(poiData)),
+            headers={"Content-Type": "application/json"}
+        )
+    else:
+        return func.HttpResponse(
+            "Please pass an word in the query string.",
+            status_code=200
+        )

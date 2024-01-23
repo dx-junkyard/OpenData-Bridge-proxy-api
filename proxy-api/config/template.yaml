@@ -7,3 +7,9 @@ digital-go-geocode:
 azure-translator:
   url: ''
   secret-name: ''
+id:
+  azure-storage:
+    secret-name: ''
+    container-name: ''
+    blob-name: ''
+
