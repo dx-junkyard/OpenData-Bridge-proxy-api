@@ -19,7 +19,7 @@ https://github.com/dx-junkyard/OpenData-Bridge-proxy-apiをforkして改修を�
 | city | string | 北九州市若松区 | 所在地_市区町村 |
 | town | string | 響町一丁目 | 所在地_町字 |
 | lat | float | 33.940111 | 緯度 |
-| lon | float 130.821747 | 経度 |
+| lon | float | 130.821747 | 経度 |
 
 ### /japanese-to-english [GET]
 日本語を英語へ翻訳
