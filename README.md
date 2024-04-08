@@ -37,13 +37,6 @@ https://github.com/dx-junkyard/OpenData-Bridge-proxy-apiをforkして改修を�
 ## digital-go-geocode
 Flaskでサーバーを立て、内部でhttps://github.com/digital-go-jp/abr-geocoderを呼び出している
 
-## proxy-api
-内部でAzure 翻訳を呼び出している
-
-## swagger endpoint
-- /apidocs
-- /swagger.json
-
 # サードパーティライブラリのクレジット
 このプロジェクトには以下のライブラリが含まれています：
 1. pandas
