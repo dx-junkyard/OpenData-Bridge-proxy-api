@@ -19,7 +19,7 @@ https://github.com/dx-junkyard/OpenData-Bridge-proxy-apiをforkして改修を�
 | city | string | 北九州市若松区 | 所在地_市区町村 |
 | town | string | 響町一丁目 | 所在地_町字 |
 | lat | float | 33.940111 | 緯度 |
-| lon | float 130.821747 | 経度 |
+| lon | float | 130.821747 | 経度 |
 
 ### /japanese-to-english [GET]
 日本語を英語へ翻訳
@@ -37,9 +37,18 @@ https://github.com/dx-junkyard/OpenData-Bridge-proxy-apiをforkして改修を�
 ## digital-go-geocode
 Flaskでサーバーを立て、内部でhttps://github.com/digital-go-jp/abr-geocoderを呼び出している
 
-## proxy-api
-内部でAzure 翻訳を呼び出している
-
-## swagger endpoint
-- /apidocs
-- /swagger.json
+# サードパーティライブラリのクレジット
+このプロジェクトには以下のライブラリが含まれています：
+1. pandas
+- ライセンス: BSD 3-Clause "New" or "Revised" License
+- 著作権:
+- - AQR Capital Management, LLC, Lambda Foundry, Inc. and PyData Development Team
+All rights reserved.　2008-2011,
+- - Open source contributors. 2011-2024,
+- このソフトウェアは、上記の著作権表示および条件リストを含めることを条件に、再配布および使用が許可されます。
+- BSD-3-Clauseライセンスの詳細: https://opensource.org/license/bsd-3-clause
+2. Flask
+- ライセンス: BSD 3-Clause "New" or "Revised" License
+- 著作権:Pallets 2010 
+- このソフトウェアは、上記の著作権表示および条件リストを含めることを条件に、再配布および使用が許可されます。
+- BSD-3-Clauseライセンスの詳細: https://opensource.org/license/bsd-3-clause
