@@ -9,3 +9,5 @@ azure-identity
 azure-storage-blob
 pandas
 openpyxl
+requests
+beautifulsoup4
