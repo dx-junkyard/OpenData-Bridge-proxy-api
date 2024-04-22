@@ -16,6 +16,51 @@ def health_check(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a health-check request.')
     return func.HttpResponse("ok", status_code=200)
 
+@app.route(route="swagger", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+def swagger(req: func.HttpRequest) -> func.HttpResponse:
+    with open(os.path.join(os.path.dirname(__file__), 'swagger', 'html2-client-generated', 'index.html'), 'r', encoding='utf-8') as html_file:
+        html_content = html_file.read()
+    
+    return func.HttpResponse(
+        html_content,
+        status_code=200,
+        headers={"Content-Type": "text/html"}
+    )
+
+@app.route(route="swagger/json", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+def swaggerJson(req: func.HttpRequest) -> func.HttpResponse:
+    with open(os.path.join(os.path.dirname(__file__), 'swagger', 'openapi.json'), 'r', encoding='utf-8') as fp:
+        print(fp)
+
+        swaggerJson = json.load(fp)
+
+    # Convert the JSON object back to a string to send as a response
+    return func.HttpResponse(
+        json.dumps(swaggerJson),
+        status_code=200,
+        headers={"Content-Type": "application/json"}
+    )
+
+    
+# from src.digital_go_geocode import DigitalGoGeocodeService
+# @app.route(route="digital-go-geocode", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+# def digital_go_geocode(req: func.HttpRequest) -> func.HttpResponse:
+
+#     digitalGoGeocodeService = DigitalGoGeocodeService()
+
+#     address = req.params.get('address')
+
+#     if address:
+#         geocode_result = digitalGoGeocodeService.get(address)
+#         return func.HttpResponse(
+#             json.dumps(asdict(geocode_result)),
+#             headers={"Content-Type": "application/json"}
+#         )
+#     else:
+#         return func.HttpResponse(
+#              "Please pass an address in the query string.",
+#              status_code=200
+#         )
 
 
 # from src.service.geocodeService import GeocodeRepository

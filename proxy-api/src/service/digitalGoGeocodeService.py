@@ -15,7 +15,7 @@ class DigitalGoGeocodeService(object):
 
     def get(self, address: str) -> DigitalGoGeocodeDomain:
         path = '/digital_geocode'
-        params = f'?address={address}'  # 日本語から英語への翻訳
+        params = f'?address={address}'
         constructed_url = self._URL + path + params
         response = requests.get(constructed_url)
 
