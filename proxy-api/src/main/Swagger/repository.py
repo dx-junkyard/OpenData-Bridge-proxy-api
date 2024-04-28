@@ -4,7 +4,7 @@ import json
 class SwaggerRepository(object):
     def __init__(self):
         self.docsPath = __file__
-        for i in range(4):
+        for i in range(5):
             self.docsPath = os.path.dirname(self.docsPath)
         self.docsPath = os.path.join(self.docsPath, 'docs')
 

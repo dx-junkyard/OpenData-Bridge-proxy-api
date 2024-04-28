@@ -15,6 +15,18 @@ class IntegrationTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.text, "ok")
 
+    def test_swagger_ui(self):
+        url = f'{self.TARGET_URL}/swagger'
+        response = requests.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('<html>', response.text)
+
+    def test_swagger_json(self):
+        url = f'{self.TARGET_URL}/swagger/json'
+        response = requests.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.headers['Content-Type'], 'application/json')
+
     def test_digital_go_geocode(self):
         url = f'{self.TARGET_URL}/digital-go-geocode?address=北九州市若松区響町一丁目'
         response = requests.get(url).json()
@@ -34,5 +46,10 @@ class IntegrationTest(unittest.TestCase):
 
         self.assertEqual(response["en"], "Tokyo")
     
+    def test_extract_links(self):
+        url = f'{self.TARGET_URL}/extract-links?url=https://www.google.com/search/about/'
+        response = requests.get(url)
+        self.assertEqual(response.status_code, 200)
+
 if __name__ == '__main__':
     unittest.main()

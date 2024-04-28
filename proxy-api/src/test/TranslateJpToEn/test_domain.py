@@ -1,21 +1,26 @@
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-
-from src.domain.idDomain import IDDomain
+sys.path.append(
+    os.path.join(
+        os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+        'main',
+        'TranslateJpToEn'
+    )
+)
+from domain import TranslateJpToEnDomain
 
 import unittest
 
-class TestIDDomain(unittest.TestCase):
+class TestTranslateJpToEnDomain(unittest.TestCase):
 
     def test_initialization(self):
         # テストデータの準備
         test_data = {
-            "id": "xxx0001",
+            "en": "test",
         }
 
         # データクラスのインスタンス化
-        domain = IDDomain(**test_data)
+        domain = TranslateJpToEnDomain(**test_data)
 
         # 各属性が正しく設定されていることを検証
         for key, value in test_data.items():
