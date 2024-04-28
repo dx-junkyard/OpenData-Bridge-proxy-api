@@ -9,3 +9,5 @@ proxy-api/config/prod.yaml
 proxy-api/src/resources/geocode/merged_jyuukyo.csv
 
 proxy-api/digital-go-geocode/*
+
+proxy-api/src/main/UniversalMenu/resources/*

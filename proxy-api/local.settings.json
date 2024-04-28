@@ -4,6 +4,7 @@
     "FUNCTIONS_WORKER_RUNTIME": "python",
     "AzureWebJobsFeatureFlags": "EnableWorkerIndexing",
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "ConfigFileName": "local.yaml"
+    "KEY_VAULT_URL": "https://odb-test-proxy-api-key.vault.azure.net",
+    "ConfigFileName" : "local.yaml"
   }
 }
