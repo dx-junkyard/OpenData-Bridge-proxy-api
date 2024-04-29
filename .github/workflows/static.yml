@@ -31,7 +31,7 @@ jobs:
       - name: Prepare files
         run: |
           mkdir public
-          cp -r ./xxx/docs/* public/
+          cp -r ./proxy-api/docs/* public/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -44,3 +44,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Output deployment URL
+        run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
