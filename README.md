@@ -33,6 +33,29 @@ https://github.com/dx-junkyard/OpenData-Bridge-proxy-apiをforkして改修を�
 | -- | -- | -- | -- |
 | en | string | Tokyo | 翻訳された英語のテキスト |
 
+### /japanese-to-english [GET]
+日本語を英語へ翻訳
+#### parameters
+| name | in | type | required | description |
+| -- | -- | -- | -- | -- |
+| jp | query | string | true | 翻訳したい日本語 |
+
+#### responses
+| name | type | example | description |
+| -- | -- | -- | -- |
+| en | string | Tokyo | 翻訳された英語のテキスト |
+
+### /extract-links [GET]
+URL先のhrefとtextを抽出する
+#### parameters
+| name | in | type | required | description |
+| -- | -- | -- | -- | -- |
+| url | query | string | true | 抽出したURL |
+
+#### responses
+| name | type | example | description |
+| -- | -- | -- | -- |
+| [ { href: href, text: text } ] | { string, string } | [ { href: https://xxx.co.jp, text: "text" } ] | URLページ内にあるすべてのhrefとtextを配列にして返す |
 
 ## digital-go-geocode
 Flaskでサーバーを立て、内部でhttps://github.com/digital-go-jp/abr-geocoderを呼び出している
