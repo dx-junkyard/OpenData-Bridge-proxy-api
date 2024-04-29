@@ -1,12 +1,16 @@
 import unittest
 import requests
+import logging
 
 class IntegrationTest(unittest.TestCase):
-    def setUp(self):
-        self.TARGET_URL = "http://localhost:7071/api"
+    TARGET_URL = "http://localhost:7071/api"
 
-    def set_target_url(self, url):
-        self.TARGET_URL = url
+    @classmethod
+    def setTargetUrl(self, url):
+        IntegrationTest.TARGET_URL = url
+
+    def setUp(self):
+        self.TARGET_URL = IntegrationTest.TARGET_URL
 
     def test_health_check(self):
         url = f'{self.TARGET_URL}/health-check'

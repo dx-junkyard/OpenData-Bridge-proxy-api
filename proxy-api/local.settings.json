@@ -5,6 +5,5 @@
     "AzureWebJobsFeatureFlags": "EnableWorkerIndexing",
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "KEY_VAULT_URL": "https://odb-test-proxy-api-key.vault.azure.net",
-    "ConfigFileName" : "local.yaml"
   }
 }

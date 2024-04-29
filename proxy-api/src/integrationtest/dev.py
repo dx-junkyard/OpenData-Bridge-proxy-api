@@ -3,7 +3,7 @@ from base import IntegrationTest
 
 def load_tests(loader, tests, pattern):
     test_cases = unittest.TestSuite()
-    url = "http://localhost:7071/api"
+    url = "https://dev-fukumoto.azurewebsites.net/api"
 
     # クラス変数を直接設定
     IntegrationTest.setTargetUrl(url)

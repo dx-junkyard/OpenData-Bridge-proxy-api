@@ -14,6 +14,7 @@ def health_check(req: func.HttpRequest) -> func.HttpResponse:
 from src.main.Swagger import SwaggerService
 @app.route(route="swagger", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
 def swagger(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info("access")
     html_content = SwaggerService().getUi()
     return func.HttpResponse(
         html_content,
@@ -87,6 +88,27 @@ def extractLinks(req: func.HttpRequest) -> func.HttpResponse:
             headers={"Content-Type": "application/json"}
         )
     except Exception as e:
+        return func.HttpResponse(
+            "Please pass an address in the query string.",
+            status_code=200
+        )
+    
+from src.main.UniversalMenu import UniversalMenuService
+@app.route(route="universal-menu", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+def universalMenu(req: func.HttpRequest) -> func.HttpResponse:
+    city = req.params.get('city')
+
+    print(city)
+
+    try:
+        ret = UniversalMenuService().get(city)
+
+        return func.HttpResponse(
+            json.dumps(asdict(ret)),
+            headers={"Content-Type": "application/json"}
+        )
+    except Exception as e:
+        print(e)
         return func.HttpResponse(
             "Please pass an address in the query string.",
             status_code=200
