@@ -2,7 +2,7 @@
 https://github.com/dx-junkyard/OpenData-Bridge-proxy-apiをforkして改修を加えたものである
 
 ## I/F設計
-### /digital-geocode [GET]
+### /digital-go-geocode [GET]
 デジタル庁のジオコーディング
 #### parameters
 | name | in | type | required | description |
