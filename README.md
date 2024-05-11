@@ -2,9 +2,9 @@
 他APIへのリクエストを行うシステム
 生成AI使用時にAPIキーが会話ログに残るとよくないので代わりにリクエストを行う
 
-# ファイル構造
-|- proxy-api: Azure-Functionsで動作する。
-|- digital-go-geocode: Dockerfileでimageを作り使用する。Flaskでサーバーを立て、内部でhttps://github.com/digital-go-jp/abr-geocoder を呼び出している
+# ファイル構造  
+|- proxy-api: Azure-Functionsで動作する。  
+|- digital-go-geocode: Dockerfileでimageを作り使用する。Flaskでサーバーを立て、内部でhttps://github.com/digital-go-jp/abr-geocoder を呼び出している  
 
 ## I/F設計
 https://dx-junkyard.github.io/OpenData-Bridge-proxy-api/
