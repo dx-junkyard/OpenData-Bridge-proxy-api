@@ -1,5 +1,4 @@
 import azure.functions as func
-import os
 import logging
 import json
 from dataclasses import asdict

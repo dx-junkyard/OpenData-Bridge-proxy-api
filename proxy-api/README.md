@@ -25,15 +25,8 @@ proxy-api
 | KEY_VAULT_URL | AzureキーコンテナーのURI |
 | AZURE-TRANSLATOR-URL | Azure翻訳のWebAPIのテキスト翻訳のURL |
 | TRANSLATE-API-KEY | Azure翻訳のAPIキー |
-| digital-go-geocode-url | ??へのURL |
+| digital-go-geocode-url | Docker containerで動かしているhttps://github.com/dx-junkyard/OpenData-Bridge-proxy-api/tree/main/digital-go-geocode へのURL |
 
 # ローカル環境で動かす場合
 local.settings.jsonに`KEY_VAULT_URL`を設定します
 その他環境変数はAzureキーコンテナー上に設定します
-
-
-
-## Azure翻訳
-
-環境変数やシークレットなどを設定
-

@@ -15,8 +15,6 @@ except:
 def get_secret(secret_name: str):
     vaultUrl = os.getenv('KEY_VAULT_URL')
 
-    print(vaultUrl)
-
     credential = DefaultAzureCredential()
     client = SecretClient(vault_url=vaultUrl, credential=credential)
     retrieved_secret = client.get_secret(secret_name)
