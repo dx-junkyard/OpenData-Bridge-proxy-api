@@ -5,19 +5,19 @@ https://dx-junkyard.github.io/OpenData-Bridge-proxy-api/
 Azure-Functionへデプロイして動かします
 
 # ファイル構造
-proxy-api
-|- docs : openapi関連
-|- src
-|  |- main
-|  |  |- DigitalGoGeocode: デジタル庁のジオコーディング
-|  |  |- ExtractLinks: URLからリンクを抽出
-|  |  |- Swagger: swagger関連
-|  |  |- TranslateJpToEn: 日本語から英語へ翻訳
-|  |- test
-|  |- integrationTest
-|     |- base.py: テストケースを記述しています
-|     |- local.py: ローカルで動作させる場合にこのプログラムを実行させます
-|- function_app.py : このプログラムが実行されます
+proxy-api  
+|- docs : openapi関連  
+|- src  
+|  |- main  
+|  |  |- DigitalGoGeocode: デジタル庁のジオコーディング  
+|  |  |- ExtractLinks: URLからリンクを抽出  
+|  |  |- Swagger: swagger関連  
+|  |  |- TranslateJpToEn: 日本語から英語へ翻訳  
+|  |- test  
+|  |- integrationTest  
+|     |- base.py: テストケースを記述しています  
+|     |- local.py: ローカルで動作させる場合にこのプログラムを実行させます  
+|- function_app.py : このプログラムが実行されます  
 
 # 設定事項
 | 環境変数名 | 内容 |
